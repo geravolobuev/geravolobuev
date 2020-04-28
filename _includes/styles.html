@@ -1,0 +1,58 @@
+<style>
+* {box-sizing: border-box;}
+body, HTML {
+        font-family: Helvetica;
+        color: #333;
+cursor: url(https://www.dropbox.com/s/siu99ca82ploan2/cursor.svg?raw=1), auto;
+}
+    a {
+            color: gray;
+            text-decoration: none;
+    }
+
+    a:hover {
+            color: #ff2587;
+    }
+
+    main {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: 1fr;
+            grid-template-areas: "grid-about grid-posts grid-projects";
+            grid-gap: 2rem;
+    }
+
+    .grid-posts { grid-area: grid-posts; }
+
+    .grid-projects { grid-area: grid-projects; }
+
+    .grid-about { grid-area: grid-about; }
+    .grid-about>* { margin: 0; }
+
+    footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+    }
+
+    footer>a {
+            color: #ff2587;
+    }
+
+    footer>a:hover {
+            color: #ffcc25;    
+    }
+
+    img {
+            max-width: 500px;
+            max-height: 500px;
+    }
+
+    @media only screen and (max-width: 800px) {
+            main {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    grid-template-areas: "grid-social" "grid-about" "grid-projects" "grid-posts";
+            }
+    }
+</style>

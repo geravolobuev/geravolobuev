@@ -1,0 +1,17 @@
+<div id="projects" class="main-page__projects grid-projects">
+        {% for project in site.projects %}
+                <a class="project-link local-link link" 
+                   href="{{ project.url }}">{{ project.title}}
+                </a>
+                <br>
+        {% endfor %}
+</div>
+<div id="posts" class="main-page__posts grid-posts">
+        {% for post in site.posts %}
+                <a class="post-link local-link link" 
+                   href="{{ post.url }}">{{ post.title}}:
+                </a>
+                {{ post.description }}
+                <br>
+        {% endfor %}
+</div>

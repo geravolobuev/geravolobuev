@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include meta.html %}
+    {% include styles.html %}
+</head>
+<body>
+    <main>
+            <section>
+        <h1 class="project-title">{{ page.title }}</h1>
+            <p style="color:gray;font-size:1rem">{{ page.info }}</p>
+            </section>
+        <video width="100%" autoplay="true" playsinline="" loop="true" muted="true\">
+                <source src="{{ page.video }}" type="video/mp4"> </video>
+
+        <article>
+            {{ content }}
+        </article>
+    </main>
+    {% include footer.html %}
+    {% include scripts.html %}
+</body>
+
+</html>
+

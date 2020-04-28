@@ -1,0 +1,29 @@
+title: gera volobuev
+permalink: /blog/:slug
+
+paginate: 5
+plugins:
+  - jekyll-minifier
+
+sass:
+  sass_dir: ./assets/css/
+  style: compressed
+
+markdown: kramdown
+
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+      start_line: 1
+
+jekyll-minifier:
+  remove_intertag_spaces: true
+
+collections:
+        projects:
+                output: true
