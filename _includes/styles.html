@@ -4,7 +4,10 @@ body, HTML {
         font-family: Helvetica;
         color: #333;
 cursor: url(https://www.dropbox.com/s/siu99ca82ploan2/cursor.svg?raw=1), auto;
+ scroll-behavior: smooth;
+ padding: 2rem;
 }
+
     a {
             color: gray;
             text-decoration: none;
@@ -14,7 +17,7 @@ cursor: url(https://www.dropbox.com/s/siu99ca82ploan2/cursor.svg?raw=1), auto;
             color: #ff2587;
     }
 
-    main {
+    .grid-container {
             display: grid;
             grid-template-columns: 1fr 2fr 1fr;
             grid-template-rows: 1fr;
@@ -22,7 +25,56 @@ cursor: url(https://www.dropbox.com/s/siu99ca82ploan2/cursor.svg?raw=1), auto;
             grid-gap: 2rem;
     }
 
-    .grid-posts { grid-area: grid-posts; }
+    .posts-grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr;
+            grid-template-areas: "grid-about grid-posts grid-projects";
+            grid-gap: 2rem;
+    }
+
+
+    .grid-posts { 
+            grid-area: grid-posts;
+    }
+
+    .grid-posts, .grid-projects {
+
+            opacity: 0.2;
+transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -webkit-transition: opacity 1s ease-in-out;
+
+    }
+
+    .social-links a:hover {
+    filter: blur(0) grayscale(0);
+    }
+    
+    .grid-posts:hover, .grid-projects:hover {
+    opacity: 1.0;
+    transition: opacity .55s ease-in-out;
+    -moz-transition: opacity .55s ease-in-out;
+    -webkit-transition: opacity .55s ease-in-out;
+    }
+
+    #appearSlowly * {
+    opacity: 0;
+
+    -webkit-transition: opacity 1s ease-in;
+       -moz-transition: opacity 1s ease-in;
+        -ms-transition: opacity 1s ease-in;
+         -o-transition: opacity 1s ease-in;
+            transition: opacity 1s ease-in;
+}
+
+#appearSlowly *.load {
+    opacity: 1;
+}
+
+main { -webkit-animation:fadein 1.0s; animation:fadein 1.0s }
+@-webkit-keyframes fadein { from {opacity:0} to {opacity:1} }
+@keyframes fadein { from {opacity:0} to {opacity:1} }
 
     .grid-projects { grid-area: grid-projects; }
 
@@ -49,7 +101,7 @@ cursor: url(https://www.dropbox.com/s/siu99ca82ploan2/cursor.svg?raw=1), auto;
     }
 
     @media only screen and (max-width: 800px) {
-            main {
+            .grid-container, .posts-grid-container {
                     display: grid;
                     grid-template-columns: 1fr;
                     grid-template-areas: "grid-social" "grid-about" "grid-projects" "grid-posts";
