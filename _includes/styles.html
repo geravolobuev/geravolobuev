@@ -394,6 +394,13 @@ font-family: 'Rubik Mono One', sans-serif;
             grid-gap: 2rem;
     }
 
+    .projects-hover {
+            background: red;
+    }
+
+    .posts-hover {
+            background: yellow;
+    }
 
     .grid-posts { 
             grid-area: grid-posts;
@@ -402,8 +409,7 @@ font-family: 'Rubik Mono One', sans-serif;
     h2, strong {
             color: #ff2587;
     }
-    .grid-posts, .grid-projects {
-
+    .grid-posts *, .grid-projects * {
             opacity: 0.2;
 transition: opacity 1s ease-in-out;
     -moz-transition: opacity 1s ease-in-out;
@@ -415,7 +421,7 @@ transition: opacity 1s ease-in-out;
     filter: blur(0) grayscale(0);
     }
     
-    .grid-posts:hover, .grid-projects:hover {
+    .grid-posts:hover *, .grid-projects:hover * {
     opacity: 1.0;
     transition: opacity .55s ease-in-out;
     -moz-transition: opacity .55s ease-in-out;
@@ -474,4 +480,32 @@ main { -webkit-animation:fadein 1.0s; animation:fadein 1.0s }
                     grid-gap: 0;
             }
     }
+
+.snow
+  $foreground-speed: 15s
+  $middleground-speed: 20s
+  $background-speed: 30s
+  display: block
+  position: absolute
+  z-index: 2
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  pointer-events: none
+  transform: translate3d(0,-100%,0)
+  animation: snow linear infinite
+  &.foreground
+    background-image: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/writing-hand_270d.png')
+    animation-duration: $foreground-speed
+    &.layered
+      animation-delay: $foreground-speed/2
+  
+
+@keyframes snow
+  0%
+    transform: translate3d(0,-100%,0)
+  100%
+    transform: translate3d(15%,100%,0)
+
 </style>
