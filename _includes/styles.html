@@ -409,6 +409,7 @@ font-family: 'Rubik Mono One', sans-serif;
     h2, strong {
             color: #ff2587;
     }
+
     .grid-posts *, .grid-projects * {
             opacity: 0.2;
 transition: opacity 1s ease-in-out;
@@ -417,10 +418,6 @@ transition: opacity 1s ease-in-out;
 
     }
 
-    .social-links a:hover {
-    filter: blur(0) grayscale(0);
-    }
-    
     .grid-posts:hover *, .grid-projects:hover * {
     opacity: 1.0;
     transition: opacity .55s ease-in-out;
@@ -479,6 +476,13 @@ main { -webkit-animation:fadein 1.0s; animation:fadein 1.0s }
             .posts-grid-container {
                     grid-gap: 0;
             }
+    .grid-posts *, .grid-projects * {
+            opacity: 1; 
+    }
+    
+    footer {
+    color: #ff2587;
+    opacity: 0.5;
     }
 
 .snow
