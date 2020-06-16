@@ -1,2 +1,2 @@
-# geravolobuev.github.io
-Personal blog 
+# geravolobuev.ru
+My personal blog. Build with Jekyll.
