@@ -1,2 +1,2 @@
 # geravolobuev.ru
-My personal blog. Build with Jekyll.
+My personal blog build with [Jekyll](https://jekyllrb.com).
