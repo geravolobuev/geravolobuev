@@ -398,6 +398,10 @@ font-family: 'Rubik Mono One', sans-serif;
             grid-gap: 2rem;
     }
 
+    .posts {
+            padding: 20%;
+    }
+
     .projects-hover {
             background: red;
     }
@@ -429,19 +433,6 @@ transition: opacity 1s ease-in-out;
     -webkit-transition: opacity .55s ease-in-out;
     }
 
-    #appearSlowly * {
-    opacity: 0;
-
-    -webkit-transition: opacity 1s ease-in;
-       -moz-transition: opacity 1s ease-in;
-        -ms-transition: opacity 1s ease-in;
-         -o-transition: opacity 1s ease-in;
-            transition: opacity 1s ease-in;
-}
-
-#appearSlowly *.load {
-    opacity: 1;
-}
 
 main { -webkit-animation:fadein 1.0s; animation:fadein 1.0s }
 @-webkit-keyframes fadein { from {opacity:0} to {opacity:1} }
@@ -477,8 +468,8 @@ main { -webkit-animation:fadein 1.0s; animation:fadein 1.0s }
                     grid-template-columns: 1fr;
                     grid-template-areas: "grid-social" "grid-about" "grid-projects" "grid-posts";
             }
-            .posts-grid-container {
-                    grid-gap: 0;
+            .posts{
+                   padding: 0; 
             }
     .grid-posts *, .grid-projects * {
             opacity: 1; 
@@ -489,31 +480,5 @@ main { -webkit-animation:fadein 1.0s; animation:fadein 1.0s }
     opacity: 0.5;
     }
 
-.snow
-  $foreground-speed: 15s
-  $middleground-speed: 20s
-  $background-speed: 30s
-  display: block
-  position: absolute
-  z-index: 2
-  top: 0
-  right: 0
-  bottom: 0
-  left: 0
-  pointer-events: none
-  transform: translate3d(0,-100%,0)
-  animation: snow linear infinite
-  &.foreground
-    background-image: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/writing-hand_270d.png')
-    animation-duration: $foreground-speed
-    &.layered
-      animation-delay: $foreground-speed/2
-  
-
-@keyframes snow
-  0%
-    transform: translate3d(0,-100%,0)
-  100%
-    transform: translate3d(15%,100%,0)
 
 </style>
