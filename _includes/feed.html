@@ -10,8 +10,9 @@
         {% for post in site.posts %}
                 <a class="post-link local-link link" 
                    href="{{ post.url }}">{{ post.title}}:
+                {{ post.description }}
+
                 </a>
-                <span>{{ post.description }}</span>
                 <br>
         {% endfor %}
 </div>
