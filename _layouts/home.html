@@ -20,6 +20,47 @@
     </main>
     {% include footer.html %}
     {% include scripts.html %}
+<canvas id="canvas">Canvas is not supported
+        on this browser!</canvas>
+        <script>
+
+document.addEventListener("mouseup", mouseEvent);
+document.addEventListener("mousedown", mouseEvent);
+document.addEventListener('mousemove', mouseEvent);
+
+const mouse = {x: 0, y: 0, down: "forcedown"};  // starts with mouse down
+function mouseEvent(event) {
+      const bounds = canvas.getBoundingClientRect();
+      const x = event.pageX - bounds.left - scrollX;
+      const y = event.pageY - bounds.top  - scrollY;
+    if (event.type === "mousedown" || mouse.down === "forcedown") {
+        mouse.down = true 
+        mouse.x = x;
+        mouse.y = y;
+    }
+    if (event.type === "mouseup") { mouse.down = false }
+    if (mouse.down) {    
+        ctx.beginPath()
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.lineTo(mouse.x = x, mouse.y = y);
+        ctx.stroke();
+    }
+}
+
+
+const ctx = canvas.getContext('2d');
+ var width  = window.innerWidth;
+        var height = window.innerHeight;
+        canvas.height = height;
+        canvas.width = width;
+
+const colorsArray = ["#5e9bd1", "#f4e78f", "#a4e38e", "#f1c39e", "#cbb7dd", "#cacaca"];
+ctx.strokeStyle = colorsArray[Math.random() * colorsArray.length | 0];
+            var lineWidth = Math.floor(Math.random()*25 + 2);
+            ctx.lineWidth = lineWidth;
+ctx.lineCap = ctx.lineJoin = 'round';
+
+                </script>
 </body>
 
 </html>
