@@ -6,20 +6,17 @@
     {% include styles.html %}
 </head>
 <body>
-    <main>
             <div class="grid-container">
-            <section>
+                    <div class="grid-left">
+                        {% include backButton.html %}
+                    </div>
+                <div class="grid-right project">
         <h2 class="project-title">{{ page.title }}</h2>
-            <p style="color:gray;font-size:1rem">{{ page.info }}</p>
-            </section>
         <video width="100%" autoplay="true" playsinline="" loop="true" muted="true\">
                 <source src="{{ page.video }}" type="video/mp4"> </video>
-
-        <article>
             {{ content }}
-        </article>
+                </div>
             </div>
-    </main>
     {% include footer.html %}
     {% include scripts.html %}
 </body>

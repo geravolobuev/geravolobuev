@@ -1,0 +1,10 @@
+        <ul class="grid-right__links">
+        {% for project in site.projects %}
+        <li>
+                <a class="project-link local-link link" 
+                   href="{{ project.url }}">{{ project.title}}
+                </a>
+        </li>
+                <br>
+        {% endfor %}
+        </ul>
