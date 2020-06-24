@@ -6,17 +6,19 @@
     {% include styles.html %}
 </head>
 <body>
-            <div class="grid-container">
-                    <div class="grid-left">
-                        {% include backButton.html %}
-                    </div>
-                <div class="grid-right project">
-        <h2 class="project-title">{{ page.title }}</h2>
+
+        <div class="grid-container grid-container__post">
+            <div class="grid-right project">  
+                    <div class="internal-wrapper">
+        <div class="project-video-wrapper">
         <video width="100%" autoplay="true" playsinline="" loop="true" muted="true\">
                 <source src="{{ page.video }}" type="video/mp4"> </video>
+        </div>
+        <p class="project-title">{{ page.title }}</p>
             {{ content }}
-                </div>
-            </div>
+                    </div>
+        </div>
+        </div>
     {% include footer.html %}
     {% include scripts.html %}
 </body>
