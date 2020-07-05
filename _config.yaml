@@ -4,6 +4,8 @@ permalink: /blog/:slug
 paginate: 5
 plugins:
   - jekyll-minifier
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
 sass:
   sass_dir: ./assets/css/
