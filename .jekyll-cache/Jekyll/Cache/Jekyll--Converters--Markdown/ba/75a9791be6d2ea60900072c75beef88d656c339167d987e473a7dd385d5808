@@ -1,0 +1,87 @@
+I"�#<h2 id="многопоточность-в-ios">Многопоточность в iOS</h2>
+
+<p>Курс неплохой. Обзорный. Хотя, в организационном плане, уступает курсам, например, Яндекса. Спикер уставшим голосом рассказывает тему, часто как будто «с бумажки». Тесты и вопросы попадаются с ошибками, не очень понятными формулировками. По окончанию курса выдается сертификат.</p>
+
+<p>Небольшой конспект по лекциям.</p>
+
+<h3 id="multithreading">Multithreading</h3>
+
+<p>Главным потоком называется поток, в котором стартует наше приложение. Все взаимодействие с интерфейсом (UI) происходит в нем.</p>
+
+<p>Основным примитивом многопоточность является поток (thread)</p>
+
+<p><strong>Thread</strong> класс - objC обертка над unix потоками для удобного создания потоков.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">nsthread</span> <span class="o">=</span> <span class="kt">Thread</span><span class="p">(</span><span class="nv">block</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Test 2"</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="n">nsthread</span><span class="o">.</span><span class="nf">start</span><span class="p">()</span></code></pre></figure>
+
+<p><strong>Quality of Service</strong> - позволяет задавать приоритет задачам. 
+Существует четыре типа QoS:<br />
+<strong>userInteractive</strong> - используется для задач взаимодействия с пользователем на главном потоке. Анимации, обновление интерфейса.<br />
+<strong>userInitiated</strong> - используется для задач, которые требуют немедленного результата, и которые влияют на действия пользователя. Сохранение документа, клик пользователя.<br />
+<strong>unility</strong> - используется для задач, которые не требуют немедленных результатов. Загрузка данных.<br />
+<strong>background</strong> - используется для задач, невинных пользователю. Синхронизация, бекап. <br />
+Также есть тип default. Если уровень на выставлен, по умолчанию ставиться default.</p>
+
+<p>Для создания пишут:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">thread</span><span class="o">.</span><span class="n">qualityOfService</span> <span class="o">=</span> <span class="o">.</span><span class="n">userInitiated</span></code></pre></figure>
+
+<p><em>Более высокий приоритет означает лишь то, что потоку будет чаще даваться возможность выполняться, но это не значит, что ему будет предоставлена возможность выполниться первым</em></p>
+
+<p><strong>Синхронизация</strong> - позволяет обеспечит доступ, одного или нескольких потоков к одному ресурсу. Для этого есть два примитива - mutex и semaphore. 
+Первый позволяет обращаться к ресурсу только одному потоку, семафор позволяет обращаться н-ому количеству потоков.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">lock</span> <span class="o">=</span> <span class="kt">NSLock</span><span class="p">()</span>
+<span class="kd">func</span> <span class="nf">test</span><span class="p">(</span><span class="kt">I</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span> <span class="c1">// захват ресурса </span>
+	<span class="c1">// do somth</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span> <span class="c1">// освобождение ресурса</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Под захватом ресурса подразумевается, что как только поток обратиться к ресурсу, никакой другой поток не сможет взаимодействовать с ресурсом и будет ожидать момента, когда первый освободит ресурс.</p>
+
+<p>Рекурсивный mutex - позволяет потоку множество раз захватывать один и тот же ресурс:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">lock</span> <span class="o">=</span> <span class="kt">NSRecursiveLock</span><span class="p">()</span>
+<span class="kd">func</span> <span class="nf">test1</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span>
+	<span class="nf">test2</span><span class="p">()</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">test2</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span>
+	<span class="c1">// do somth</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><em>Задача закрытая <strong>condition</strong> не начнет выполнятся пока не получит сигнал (signal) из другого потока:</em></p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="k">let</span> <span class="nv">condition</span> <span class="o">=</span> <span class="kt">NSCondition</span><span class="p">()</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">check</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span>
+ 
+<span class="kd">func</span> <span class="nf">test1</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">condition</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">check</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">condition</span><span class="o">.</span><span class="nf">wait</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
+    <span class="n">condition</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">test2</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">condition</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span>
+    <span class="n">check</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="n">condition</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">thread1</span> <span class="o">=</span> <span class="kt">Thread</span> <span class="p">{</span>
+    <span class="nf">test1</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">thread1</span><span class="o">.</span><span class="nf">start</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">thread2</span> <span class="o">=</span> <span class="kt">Thread</span> <span class="p">{</span>
+    <span class="nf">test2</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">thread2</span><span class="o">.</span><span class="nf">start</span><span class="p">()</span></code></pre></figure>
+
+:ET

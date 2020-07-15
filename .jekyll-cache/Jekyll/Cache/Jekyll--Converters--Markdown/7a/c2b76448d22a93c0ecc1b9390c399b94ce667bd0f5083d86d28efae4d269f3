@@ -1,0 +1,397 @@
+I"٫<h2 id="многопоточность-в-ios">Многопоточность в iOS</h2>
+
+<p>Курс неплохой. Обзорный. Хотя, в организационном плане, уступает курсам, например, Яндекса. Спикер уставшим голосом рассказывает тему, часто как будто «с бумажки». Тесты и вопросы попадаются с ошибками, не очень понятными формулировками. По окончанию курса выдается сертификат.</p>
+
+<p>Небольшой конспект по лекциям.</p>
+
+<h3 id="multithreading">Multithreading</h3>
+
+<p>Главным потоком называется поток, в котором стартует наше приложение. Все взаимодействие с интерфейсом (UI) происходит в нем.</p>
+
+<p>Основным примитивом многопоточность является поток (thread)</p>
+
+<p><strong>Thread</strong> класс - objC обертка над unix потоками для удобного создания потоков.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">nsthread</span> <span class="o">=</span> <span class="kt">Thread</span><span class="p">(</span><span class="nv">block</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Test 2"</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="n">nsthread</span><span class="o">.</span><span class="nf">start</span><span class="p">()</span></code></pre></figure>
+
+<p><strong>Quality of Service</strong> - позволяет задавать приоритет задачам. 
+Существует четыре типа QoS:<br />
+<strong>userInteractive</strong> - используется для задач взаимодействия с пользователем на главном потоке. Анимации, обновление интерфейса.<br />
+<strong>userInitiated</strong> - используется для задач, которые требуют немедленного результата, и которые влияют на действия пользователя. Сохранение документа, клик пользователя.<br />
+<strong>unility</strong> - используется для задач, которые не требуют немедленных результатов. Загрузка данных.<br />
+<strong>background</strong> - используется для задач, невинных пользователю. Синхронизация, бекап. <br />
+Также есть тип default. Если уровень на выставлен, по умолчанию ставиться default.</p>
+
+<p>Для создания пишут:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">thread</span><span class="o">.</span><span class="n">qualityOfService</span> <span class="o">=</span> <span class="o">.</span><span class="n">userInitiated</span></code></pre></figure>
+
+<p><em>Более высокий приоритет означает лишь то, что потоку будет чаще даваться возможность выполняться, но это не значит, что ему будет предоставлена возможность выполниться первым</em></p>
+
+<p>__
+Синхронизация - позволяет обеспечит доступ, одного или нескольких потоков к одному ресурсу. Для этого есть два примитива - mutex и semaphore. 
+Первый позволяет обращаться к ресурсу только одному потоку, семафор позволяет обращаться н-ому количеству потоков.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">lock</span> <span class="o">=</span> <span class="kt">NSLock</span><span class="p">()</span>
+<span class="kd">func</span> <span class="nf">test</span><span class="p">(</span><span class="kt">I</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span> <span class="c1">// захват ресурса </span>
+	<span class="c1">// do somth</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span> <span class="c1">// освобождение ресурса</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Под захватом ресурса подразумевается, что как только поток обратиться к ресурсу, никакой другой поток не сможет взаимодействовать с ресурсом и будет ожидать момента, когда первый освободит ресурс.</p>
+
+<p>Рекурсивный mutex - позволяет потоку множество раз захватывать один и тот же ресурс:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">lock</span> <span class="o">=</span> <span class="kt">NSRecursiveLock</span><span class="p">()</span>
+<span class="kd">func</span> <span class="nf">test1</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span>
+	<span class="nf">test2</span><span class="p">()</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">test2</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span>
+	<span class="c1">// do somth</span>
+	<span class="n">lock</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>__
+Задача закрытая condition не начнет выполнятся пока не получит сигнал (signal) из другого потока:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="k">let</span> <span class="nv">condition</span> <span class="o">=</span> <span class="kt">NSCondition</span><span class="p">()</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">check</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span>
+ 
+<span class="kd">func</span> <span class="nf">test1</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">condition</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">check</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">condition</span><span class="o">.</span><span class="nf">wait</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
+    <span class="n">condition</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">test2</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">condition</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span>
+    <span class="n">check</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="n">condition</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">thread1</span> <span class="o">=</span> <span class="kt">Thread</span> <span class="p">{</span>
+    <span class="nf">test1</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">thread1</span><span class="o">.</span><span class="nf">start</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">thread2</span> <span class="o">=</span> <span class="kt">Thread</span> <span class="p">{</span>
+    <span class="nf">test2</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">thread2</span><span class="o">.</span><span class="nf">start</span><span class="p">()</span></code></pre></figure>
+
+<p>__
+Context switch - происходит при переключении между потоками. Это довольно «дорогостоящая» операция системы. Для мьютексов есть очередность выполнение. В случае с unfair lock предпочтение будет отдаваться тому потоку, который обращается к ресурсу чаще.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="k">var</span> <span class="nv">lock</span> <span class="o">=</span> <span class="nf">os_unfair_lock_s</span><span class="p">()</span>
+<span class="kd">func</span> <span class="nf">test</span><span class="p">(</span><span class="nv">i</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nf">os_unfair_lock_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">)</span>
+   <span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+   <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+   <span class="nf">os_unfair_lock_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>__
+Типичные проблемы при работе с потоками:
+Deadlock - Состояние, при котором каждый участник (поток) ждет когда другой участник «отпустит» lock.  Т.е. потоки пытаются обратиться к уже захваченным ресурсам, в следствии чего программа зависает.
+LiveLock - Тоже, что и deadlock, только состояние процессов задействованных в действиях постоянно меняются, но прогресса в выполнении работы не происходит. Оба потока выполняет бесполезную работу.
+Priority Inversion - Низкоприоритетный поток захватывает ресурс, остальные потоки ждут.</p>
+
+<p>Библиотека Grand Central Dispatch</p>
+
+<p>Основной примитив GCD - очередь (Queue). Есть два типа:</p>
+<ol>
+  <li>Serial - выполняет задачи последовательно.</li>
+  <li>Concurrent - позволяет выполнять задачи одновременно.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">serialQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="err">«</span><span class="n">serialTest</span><span class="err">»</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">concurrentQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="err">«</span><span class="n">concurrentTest</span><span class="err">»</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="o">.</span><span class="n">concurrent</span><span class="p">)</span></code></pre></figure>
+
+<p>Также можно получить очередь из пула очередей. Для этого нужно обратиться к global:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">globalQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">()</span></code></pre></figure>
+
+<p>Все глобальные очереди - concurrent. Кроме очереди main:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">mainQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span></code></pre></figure>
+
+<p>Все задачи, выполняемые на очереди main, выполняются на главном потоке.</p>
+
+<p>__
+Наиболее частые методы взаимодействия с очередями async и sync.
+В случае метода async управление возвращается вызывающему потоку:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">testConcurrent</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">concurrentQueue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="nf">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// this will be triggered after 'test 2'</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"test 1"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">concurrentQueue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"test 2"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Для sync - ожидает выполнение вашей задачи.
+Для того что бы отложить выполнение задачи есть asyncAfter()</p>
+
+<p>__
+concurrentPerform - Параллельный цикл. Более эффективно применять, нежели использовать dispatchAsync в цикле for:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">test</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">concurrentPerform</span><span class="p">(</span><span class="nv">iterations</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nv">execute</span><span class="p">:</span> <span class="p">{</span> <span class="kt">I</span> <span class="k">in</span> 
+		<span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+	<span class="p">})</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Особенно эффективен при большом количестве итераций. Использует свободные ресурсы системы.</p>
+
+<p>__
+DispatchWorkItem - данный класс, абстракция над выполняемой задачей с рядом удобных методов.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"test"</span><span class="p">)</span>
+<span class="kd">func</span> <span class="nf">testQueue</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"test 1"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">let</span> <span class="nv">item</span> <span class="o">=</span> <span class="kt">DispatchWorkItem</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">queue</span><span class="o">.</span><span class="nf">async</span><span class="p">(</span><span class="nv">execute</span><span class="p">:</span> <span class="n">item</span><span class="p">)</span> <span class="c1">// выполнится не успеет</span>
+    <span class="n">item</span><span class="o">.</span><span class="nf">cancel</span><span class="p">()</span> <span class="c1">// отмена задачи</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Отмена задачи произойдёт, только если задача не была направленна на выполнение(execute).</p>
+
+<p>__</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">semaphore</span> <span class="o">=</span> <span class="kt">DispatchSemaphore</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+	<span class="c1">// Передавая целочисленное значение в параметр value, мы можем</span>
+	<span class="c1">// контролировать количество потоков которые могут обращаться к ресурсу. </span>
+<span class="kd">func</span> <span class="nf">doWork</span><span class="p">()</span> <span class="p">{</span>
+    
+    <span class="n">semaphore</span><span class="o">.</span><span class="nf">wait</span><span class="p">()</span>
+	<span class="c1">// Вызываем метод wait(), который блокирует наш поток, пока внутри задачи в 	// очередь на выполнение не вызовется метод signal()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
+    <span class="nf">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">semaphore</span><span class="o">.</span><span class="nf">signal</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">()</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="nf">doWork</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">()</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="nf">doWork</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">()</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="nf">doWork</span><span class="p">()</span>
+    <span class="p">}</span>
+	<span class="c1">// Процесс будет исполнятся в первых 2-х случаях, потому что мы </span>
+	<span class="c1">// указали value = 2. Когда же 3 поток попробует его захватить - тогда будет</span>
+	<span class="c1">// ожидание wait() пока не выполнится один из предыдущих потоков.</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>__
+Для ситуаций, в которых необходимо определить порядок выполнения задач, можно также воспользоваться DispatchGroup. Он позволяет определять задачи в группы, и затем дожидаться пока не выполнятся все задачи в группе.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">group</span> <span class="o">=</span> <span class="kt">DispatchGroup</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"DispatchGroupTest1"</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="o">.</span><span class="n">concurrent</span><span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">testWait</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">group</span><span class="o">.</span><span class="nf">enter</span><span class="p">()</span>
+	<span class="c1">// Метод enter говорит о том, что мы «заходим» в группу. leave - выходим.</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"1"</span><span class="p">)</span>
+        <span class="n">group</span><span class="o">.</span><span class="nf">leave</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="n">group</span><span class="o">.</span><span class="nf">enter</span><span class="p">()</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="nf">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"2"</span><span class="p">)</span>
+        <span class="n">group</span><span class="o">.</span><span class="nf">leave</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="n">group</span><span class="o">.</span><span class="nf">wait</span><span class="p">()</span>
+	<span class="c1">// Метод wait означает, что пока все задачи объединенные в группу, перед 	</span>
+	<span class="c1">// которыми был вызван метод enter, не завершили свое выполнение, и не </span>
+	<span class="c1">// вызвали метод leave вызывающий поток будет блокироваться.</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"finished"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>__
+Что бы реализовать read-write lock в GCD используется Barrier Block. Он ждет пока не выполняется все поставленные ранее блоки в очередь, после этого начинает выполнение своего кода и ставит блок на очередь пока не выполнится сам, далее могут начать выполнятся блоки после него.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"DispatchBarrierTest"</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="o">.</span><span class="n">concurrent</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">internalTest</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">func</span> <span class="nf">setTest</span><span class="p">(</span><span class="n">_</span> <span class="nv">test</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">queue</span><span class="o">.</span><span class="nf">async</span><span class="p">(</span><span class="nv">flags</span><span class="p">:</span> <span class="o">.</span><span class="n">barrier</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">internalTest</span> <span class="o">=</span> <span class="n">test</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">test</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">tmp</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">sync</span> <span class="p">{</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">internalTest</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">tmp</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>При таком подходе ресурс блокируется только на запись.</p>
+
+<p>__
+DisptachSource - специальный тип GCD, позволяющий взаимодействовать с системными событиями. Есть 4ре вида:</p>
+<ol>
+  <li>Timer dispatch source - генерирует периодические уведомления</li>
+  <li>Signal dispatch source - оповещает о приходе unix сигналов</li>
+  <li>Descriptor dispatch source - оповещает что с файлом были произведенные различные операции</li>
+  <li>Process dispatch source - оповещает о событиях процесса</li>
+</ol>
+
+<p>Все dispatchSource по умолчанию создаются неактивными.</p>
+
+<p>__
+Что бы сократись переключение контекста есть targetQueue.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">targetQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"TargetQueue"</span><span class="p">)</span>
+<span class="kd">func</span> <span class="nf">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">queue1</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"Queue1"</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="n">targetQueue</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">dispatchSource1</span> <span class="o">=</span> <span class="kt">DispatchSource</span><span class="o">.</span><span class="nf">makeTimerSource</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="n">queue1</span><span class="p">)</span>
+    <span class="n">dispatchSource1</span><span class="o">.</span><span class="n">setEventHandler</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"test1"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">dispatchSource1</span><span class="o">.</span><span class="nf">schedule</span><span class="p">(</span><span class="nv">deadline</span><span class="p">:</span> <span class="o">.</span><span class="nf">now</span><span class="p">(),</span> <span class="nv">repeating</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">dispatchSource1</span><span class="o">.</span><span class="nf">activate</span><span class="p">()</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>TargetQueue должна быть serial, при concurrent переключения потоков не избежать.</p>
+
+<p>__
+DisptachIO - API для взаимодействия с файловой системой.</p>
+
+<p>Operation</p>
+
+<p>Наследником класса OperationQueue() является BlockOperation:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">operationQueue</span> <span class="o">=</span> <span class="kt">OperationQueue</span><span class="p">()</span>
+<span class="kd">func</span> <span class="nf">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">blockOperation</span> <span class="o">=</span> <span class="kt">BlockOperation</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">operationQueue</span><span class="o">.</span><span class="nf">addOperation</span><span class="p">(</span><span class="n">blockOperation</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Как только добавляем (addOperation) операцию, она будет выполнена.</p>
+
+<p>Жизненный цикл Operation</p>
+<ul>
+  <li>isReady говорит о том, что операция готова для выполнения (свойство выставлено в true). Свойство выставлено в false, если зависимые операции еще не выполнились. Обычно у вас нет прямой необходимости для того, чтобы переопределять это свойство. Если готовность ваших операций определяется не только через зависимые операции, вы можете предоставить свою собственную имплементацию isReady и определять готовность операции для выполнения самостоятельно.</li>
+  <li>isExecuting означает, что операция выполняется в данный момент. True если операция выполняется, false если нет. Если вы переопределяете метод start, вы также должны переопределить isExecuting и отправлять kvo нотификации, когда статус выполнения вашей операции изменился.</li>
+  <li>isFinished означает, что операция была успешно завершена или отменена. Пока свойство будет выставлено в false, операция будет находиться в operation queue. Если вы переопределяете метод start, вы также должны переопределить isFinished и отправлять kvo нотификации, когда ваша операция будет выполнена или отменена.</li>
+  <li>isCancelled означает, что запрос об отмене операции был отправлен. Поддержку отмены операции вы должны реализовать самостоятельно.</li>
+</ul>
+
+<p>isAsynchronous - является ли операция асинхронной.</p>
+
+<p>Методы:
+start() - начать выполнение операции
+main() - определяем основной функционал</p>
+
+<p>__
+OperationQueue - очередь FIFO.  Запускает операции асинхронно.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">operationQueue</span> <span class="o">=</span> <span class="kt">OperationQueue</span><span class="p">()</span>
+<span class="kd">class</span> <span class="kt">OperationA</span><span class="p">:</span> <span class="kt">Operation</span> <span class="p">{</span> <span class="c1">// пример создания кастомной operation </span>
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">testOperation</span> <span class="o">=</span> <span class="kt">OperationA</span><span class="p">()</span>
+    <span class="n">operationQueue</span><span class="o">.</span><span class="nf">addOperation</span><span class="p">(</span><span class="n">testOperation</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>__
+Работая без operationQueue, операция создается по умолчанию синхронной.
+Операция запускается из потока, откуда вызвали метод start()
+Можно создать асинхронную операцию, где сами определяем поток выполнения.
+при создании асинхронной операции нужно переопределять свойства isAsynchronous, isFinished и isExecuting</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">AsyncOperation</span><span class="p">:</span> <span class="kt">Operation</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">finish</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">execute</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="kd">private</span> <span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"AsyncOperation"</span><span class="p">)</span>
+    
+    <span class="k">override</span> <span class="k">var</span> <span class="nv">isAsynchronous</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span> <span class="p">}</span>
+    <span class="k">override</span> <span class="k">var</span> <span class="nv">isFinished</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">return</span> <span class="n">finish</span> <span class="p">}</span>
+    <span class="k">override</span> <span class="k">var</span> <span class="nv">isExecuting</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">return</span> <span class="n">execute</span> <span class="p">}</span>
+    
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+            <span class="k">self</span><span class="o">.</span><span class="nf">main</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="n">execute</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="p">}</span>
+    
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
+        <span class="n">finish</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="n">execute</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>__
+Свойство OperationQueue maxConcurrentOperationCount позволяет определить колл-во одновременно выполняемых операций.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">operationQueue</span><span class="o">.</span><span class="n">maxConcurrentOperationCount</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">operationQueue</span><span class="o">.</span><span class="n">addOperation</span> <span class="p">{</span> <span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="nf">print</span><span class="p">(</span><span class="err">«</span><span class="n">test1</span><span class="err">»</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">operationQueue</span><span class="o">.</span><span class="n">addOperation</span> <span class="p">{</span> <span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="nf">print</span><span class="p">(</span><span class="err">«</span><span class="n">test2</span><span class="err">»</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">operationQueue</span><span class="o">.</span><span class="n">addOperation</span> <span class="p">{</span> <span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="nf">print</span><span class="p">(</span><span class="err">«</span><span class="n">test3</span><span class="err">»</span><span class="p">)</span> <span class="p">}</span></code></pre></figure>
+
+<p>Т.е. Одновременно, в данном случае, может выполняется только 1 операция. Как только первая операция будет выполнена, пойдет вторая, и тд.</p>
+
+<p>__
+Еще одно ключевое преимущество операция над GCD является Dependencies.
+Они позволяет определять порядок выполнения операций:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">operationQueue</span> <span class="o">=</span> <span class="kt">OperationQueue</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">operation1</span> <span class="o">=</span> <span class="kt">BlockOperation</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"test1"</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">let</span> <span class="nv">operation2</span> <span class="o">=</span> <span class="kt">BlockOperation</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"test2"</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">let</span> <span class="nv">operation3</span> <span class="o">=</span> <span class="kt">BlockOperation</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"test3"</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">operation3</span><span class="o">.</span><span class="nf">addDependency</span><span class="p">(</span><span class="n">operation2</span><span class="p">)</span>
+<span class="n">operationQueue</span><span class="o">.</span><span class="nf">addOperations</span><span class="p">([</span><span class="n">operation1</span><span class="p">,</span> <span class="n">operation2</span><span class="p">,</span> <span class="n">operation3</span><span class="p">],</span> <span class="nv">waitUntilFinished</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span> <span class="c1">// метод waitUntil</span></code></pre></figure>
+
+<p>Метод waitUntil блокирует вызывающий поток, пока все операций находящиеся в operationQueue не будут выполнены.
+Также может быть написан как:
+operationQueue.watiUntilAllOperationsAreFinished()</p>
+
+<p>__
+CompletionBlock - код который будет выполнятся по окончанию выполнения операции:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">test</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">let</span> <span class="nv">operation</span> <span class="o">=</span> <span class="kt">BlockOperation</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="err">«</span><span class="n">test</span><span class="err">»</span><span class="p">)</span> <span class="p">}</span>
+	<span class="n">operation</span><span class="o">.</span><span class="n">completionBlock</span> <span class="o">=</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="err">«</span><span class="n">finished</span><span class="err">»</span><span class="p">)</span> <span class="p">}</span>
+	<span class="n">operationQueue</span><span class="o">.</span><span class="nf">addOperation</span><span class="p">(</span><span class="n">operation</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>__
+suspend позволяет приостановить выполнение operationQueue.
+operationQueue.isSuspended = true
+Остановка очереди происходит не сразу. Очередь дожидается пока не текущая выполняемая операция не будет выполнена.</p>
+
+<p>__
+GCD vs OPERATION</p>
+
+<p>Operation - под капотом GCD. Высокоуровневая абстракция.
+	Преимущества: Cancelation, Observable, Dependencies
+GDC - более низкоуровневый примитив.
+	Преимущества: Простота, Низкоуровневость.</p>
+
+:ET
