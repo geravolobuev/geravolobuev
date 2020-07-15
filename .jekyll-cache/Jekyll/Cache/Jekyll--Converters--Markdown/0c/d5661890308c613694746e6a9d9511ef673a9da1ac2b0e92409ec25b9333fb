@@ -1,7 +1,0 @@
-I"s
-<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">serialQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="err">«</span><span class="n">serialTest</span><span class="err">»</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">concurrentQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span>
-<span class="nv">label</span><span class="p">:</span> <span class="err">«</span><span class="n">concurrentTest</span><span class="err">»</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="o">.</span><span class="n">concurrent</span>
-<span class="p">)</span></code></pre></figure>
-
-:ET
