@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Дэвид Аллен 
+title: Аллен - GTD
 date: 2020-03-18 19:00:00 +0000
 description: "Getting Things Done"
 ---

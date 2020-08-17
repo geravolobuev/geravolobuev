@@ -1,0 +1,9 @@
+        <ul class="ul-links">
+        {% for project in site.projects %}
+        <video width="100%" autoplay="true" playsinline="" loop="true" muted="true\">
+                <source src="{{ project.video }}" type="video/mp4"> </video>
+                <li>{{ project.titleEn}}</li>
+                <br>
+                <br>
+        {% endfor %}
+                </ul>

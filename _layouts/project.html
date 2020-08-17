@@ -6,20 +6,15 @@
     {% include styles.html %}
 </head>
 <body>
-
-        <div class="grid-container grid-container__post">
-            <div class="project">  
-                    <div class="internal-wrapper">
-        <div class="project-video-wrapper">
+        </div class="wrapper">
+        <main>
+                <article>
         <video width="100%" autoplay="true" playsinline="" loop="true" muted="true\">
                 <source src="{{ page.video }}" type="video/mp4"> </video>
-        </div>
             {{ content }}
-                    </div>
-        </div>
-        </div>
-    {% include footer.html %}
-    {% include scripts.html %}
+                </article>
+        </main>
+    </div>
 </body>
 
 </html>

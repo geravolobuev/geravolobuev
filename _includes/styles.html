@@ -6,14 +6,26 @@ body, HTML {
 font-family: 'Helvetica-neue', sans-serif;
 cursor: url(/assets/cursor.svg), auto;
  scroll-behavior: smooth;
-background: #F4F2F2;
-color: #2C2A38;
 -webkit-font-smoothing: antialiased;
+    margin: 0;
 }
 
 .ast-pink {
             color: #ff2587;
 }
+
+.wrapper {
+background: #FAFAFA;
+}
+
+.wrapper-portfolio {
+        background: black;
+        color: white;
+}
+
+    .portfolio {
+            padding: 2rem;
+    }
 
 #canvas {
 z-index: 1;
@@ -32,18 +44,6 @@ pre {
  word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
-h2 {
-        font-size: 5rem;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  hyphens: auto;
-  line-height: 5rem;
-}
-
-    h3 {
-margin-top: 5rem;
-    }
-
     a {
             color: #2200ED;
             text-decoration: none;
@@ -55,135 +55,94 @@ margin-top: 5rem;
             color:#ed00c9
     }
 
-    .grid-right {
-        justify-self: end;
+    h2 {
+            font-size: 2.9rem;
+            font-weight: normal;
+            margin-bottom: 10%;
     }
 
-    .grid-right__links {
+    blockquote {
+            margin: 0;
+            color:gray;
+    }
+
+    main {
+            font-size: 2.9rem;
+    line-height: 3.3rem;
+            position: relative;
+    z-index: 10;
+    padding: 2rem;
+    }
+    
+
+    .portfolio-header {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  grid-template-rows: 1fr;
+  gap: 1px 1px;
+  grid-template-areas: ". .";
+  min-height: 25rem;
+    }
+
+    article {
+max-width: 1120px;
+}
+
+    .mark {
+background-image: linear-gradient(120deg,#ff0,#ff0);
+    background-repeat: no-repeat;
+    background-size: 100% .55em;
+    background-position: 0 110%;
+    }
+
+    .portfolio-link {
+color: white;
+    }
+    .ul-links{
             list-style: none;
             padding: 0 1rem 0 0;
             margin: 0;
     }
 
-    
-    .grid-container__home {
-        z-index: 10;
-    position: absolute;
- width: 100%;
+    .ul-links__p {
+            margin-bottom: 0;
     }
 
-    .about__text {
-            margin: 0;
-    }
-
-    .largeText {
-            font-size: 2.5rem;
-            }
-
-.grid-container {
+    .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  gap: 2rem;
-  grid-template-areas: "grid-left grid-right";
-    padding: 1rem;
-
+  gap: 1px 1px;
+  grid-template-areas: ". .";
 }
 
-.grid-left { grid-area: grid-left; }
-
-.grid-right { grid-area: grid-right; }
-
-.posts {
-        justify-self: normal;
-}
-
-    .grid-container__projects {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 5rem;
+    .about-right {
+            text-align: right;
     }
 
-    .project-video-wrapper {
-            background-color: black;
-    margin: 5% 0;
+    .about_text{
+            margin:0;
     }
 
-    .project {
-            font-size: 25px;
-    line-height: 32px;
-    font-weight: 100;
-    }
-
-    .grid-container__post {
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "grid-right";
-    }
-
-    .post {
-            font-family: Georgia;
-            font-size: 25px;
-    line-height: 32px;
-    font-weight: 100;
-    }
-
-    .project-link {
-            position: relative;
-    z-index: 10;
-            }
-
-    .internal-wrapper {
-            max-width: 60%;
-            margin: auto;
-    }
-
-    .posts-hover {
-            background: yellow;
-    }
-
-
-    footer {
-            z-index: 10;
-            position: fixed;
-            bottom: 0;
-            left: 0;
+    .lowercased {
+            text-transform: lowercase;
     }
 
     img, video {
             margin: 1rem 0;
-            max-width: 100%;
+    -ms-interpolation-mode: nearest-neighbor;
+    width: calc(100vw - 100px);
+    max-height: 810px;
+    max-width: 810px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    -o-object-position: top left;
+    object-position: top left;
     }
 
     @media only screen and (max-width: 800px) {
 
-    .internal-wrapper {
-            max-width: 90%;
-            margin: auto;
     }
-
-            h2 {
-                    font-size: 2.5rem;
-                    line-height: 2.5rem;
-            }
-
-            .grid-container {
-                    display: grid;
-                    grid-template-columns: 1fr;
-                    grid-template-areas: "grid-left" "grid-right";
-                    gap: 5rem;
-            }
-
-            .grid-container__projects {
-                    grid-template-columns: 1fr;
-            }
-
-            .posts{
-                   padding: 0; 
-            }
     
-    footer {
-    opacity: 0.5;
-    }
 
 </style>

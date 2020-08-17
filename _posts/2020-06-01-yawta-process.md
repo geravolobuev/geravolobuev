@@ -1,6 +1,6 @@
 ---
 layout: post
-title: YAWTA
+title: процесс написания YAWTA
 date: 2020-06-01 12:00:00 +0000
 description: Процесс создания приложения
 ---

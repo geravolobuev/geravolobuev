@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     {% include meta.html %}
     {% include styles.html %}
@@ -8,26 +7,28 @@
 </head>
 
 <body>
-            <div class="grid-container grid-container__home largeText">
-<div class="grid-left">
-        <p class="about__text">гера волобуев<br>
-        <br>
-        <br>
-        пишу приложения<br>
-        <br>
-        немножко рисую<br>
-        &nbsp макеты и дизайн<p>
-</div>
-<div class="grid-right">
-        <ul class="grid-right__links">
-                <li><a href="/projects">работы</a></li>
-                <li><a href="/blog">конспекты</a></li>
-        </ul>
-</div>
+        <div class="wrapper">
+        <main class="lowercased">
+                <section class="about">
+                        <div class="about-left">
+        <p class="about_text">гера волобуев<br>
+        &nbsp дизайнер
+        </p>
+                        </div>
+                        <div class="about-right">
+        <a href="/en">en</a>
+                        </div>
+        </section>
 
-            </div>
+                <section class="projects">
+            {% include feed-projects.html %}
+                </section>
+
+                <section class="posts">
+            {% include feed-posts.html %}
+                </section>
     {% include footer.html %}
-    {% include scripts.html %}
+            </main>
 <canvas id="canvas">Canvas is not supported
         on this browser!</canvas>
         <script>
@@ -62,13 +63,15 @@ const ctx = canvas.getContext('2d');
         canvas.height = height;
         canvas.width = width;
 
-const colorsArray = ["#5e9bd1", "#f4e78f", "#a4e38e", "#f1c39e", "#cbb7dd", "#cacaca"];
+const colorsArray = ["#e38ea5", "#f4e78f", "#a4e38e", "#f1c39e", "#cbb7dd",
+"#e79ef1"];
 ctx.strokeStyle = colorsArray[Math.random() * colorsArray.length | 0];
-            var lineWidth = Math.floor(Math.random()*200 + 20);
+            var lineWidth = Math.floor(Math.random()*300 + 20);
             ctx.lineWidth = lineWidth;
 ctx.lineCap = ctx.lineJoin = 'round';
 
                 </script>
+        </div>
 </body>
 
 </html>

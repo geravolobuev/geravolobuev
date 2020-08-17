@@ -1,10 +1,8 @@
+        <ul class="ul-links">
+                <p class="ul-links__p">_проекты</p>
         {% for project in site.projects %}
-        <div class="project-box">
-                <a class="project-link local-link link" 
+                <li><a class="project-link local-link link" 
                    href="{{ project.url }}">{{ project.title}}
-                </a>
-        <video class="" width="75%" autoplay="true" playsinline="" loop="true" muted="true\">
-                <source src="{{ project.video }}" type="video/mp4"> </video>
-        </div>
-        </br >
+                        </a></li>
         {% endfor %}
+                </ul>

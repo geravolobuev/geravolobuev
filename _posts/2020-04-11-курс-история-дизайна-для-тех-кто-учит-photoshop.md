@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Софья Цыткина 
+title: История дизайна через Photoshop
 date: 2020-04-11 19:00:00 +0000
 description: Курс "История дизайна для тех, кто учит Photoshop"
 

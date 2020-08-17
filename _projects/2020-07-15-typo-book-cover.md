@@ -1,9 +1,12 @@
 ---
 layout: project
-title: обложка книги "типографика - порядок и хаос"
+title: обложка книги "типографика"
+titleEn: V. Laptev "Typography" book soft/hardcover
 date: 2020-07-06 02:00:00 +0000
-video: https://www.dropbox.com/s/3kepzpwpjcsz6oo/typo-book-cover.mov?raw=1
+video: https://www.dropbox.com/s/oifhukd3z68mplr/typo-book-cover.m4v?raw=1
 --- 
+
+<span class="mark">Обложка книги "Типографика: Порядок и Хаос"</span>
 
 **Задача**
 
