@@ -6,7 +6,7 @@ date: 2020-08-16 12:00:00 +0000
 video: https://www.dropbox.com/s/hf0orsnrnhp4dp6/alex-flyers-posters.m4v?raw=1
 --- 
 
-## <span class="mark">"Графические элементы кампании «Stop child marriage» "</span>
+## <span class="mark">Графические элементы кампании «Stop child marriage</span>
 
 **Цель**  
 Сделать графическое оформление листовок, постеров на тему проблемы раннего замужества в Уганде для учебной организации.
@@ -31,6 +31,7 @@ education = healthy nation
 Вообразив себя Оливеро Тоскани, сделал несколько вариантов постеров.
 
 ![alex-posters](https://www.dropbox.com/s/snv8ikwgp62wf2l/alex-poster.jpg?raw=1)
+![alex-poster-real](https://www.dropbox.com/s/kwv9wy3bogac467/alex-poster-real.jpg?raw=1)
 
 Для флаеров клиент настоял на более «консервативном» оформлении. 
 
