@@ -19,7 +19,7 @@ video: https://www.dropbox.com/s/tz89pcfxlokeyvh/rx-mail-video.m4v?raw=1
 
 Изначальный вариант от флаера от клиента:
 
-![original[(https://www.dropbox.com/s/27ql5uqw150m65g/original.jpg?raw=1)
+![original](https://www.dropbox.com/s/27ql5uqw150m65g/original.jpg?raw=1)
 
 Бренд бука у клиента нет. При создании использовал цвета из логотипа и оформления сайта компании. Шрифт Helvetica Neue.
 
