@@ -25,3 +25,5 @@ video: https://www.dropbox.com/s/oifhukd3z68mplr/typo-book-cover.m4v?raw=1
 ![typo-book-early](https://www.dropbox.com/s/v0q7bzwta1p45fh/typo-book-early.jpg?raw=1)
 
 Так как книга нишевой тематики, читатель скорее всего будет знаком с темой. Соответственно выводя имена известных дизайнеров, а не название книги, на обложку с большим успехом может быть достигнут эффект привлечения внимания аудитории.
+
+![typo-book-real](https://www.dropbox.com/s/8ndtcwhnx0z8ykt/typo-book-real.jpg?raw=1)
