@@ -4,6 +4,7 @@ title: Флаер для rx partnership
 titleEn: Rx-Partnership flyer (8.5x11)
 date: 2020-09-01 12:00:00 +0000
 video: https://www.dropbox.com/s/tz89pcfxlokeyvh/rx-mail-video.m4v?raw=1
+thumbnail: https://www.dropbox.com/s/bb4m6sxozys63k0/thumb.jpg?raw=1
 --- 
 
 ## <span class="mark">Дизайн флаера для Rx Partnersip</span>
