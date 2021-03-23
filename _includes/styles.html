@@ -100,12 +100,17 @@ color: white;
     }
 
 .preview { 
-display: none; 
-opacity: 0.3;
-max-width: 50%;
-max-height: 50%;
+display: none;
+    opacity: 0.3;
+    max-width: 50%;
+    max-height: 50%;
+    position: fixed;
+    height: auto;
+    left: 0;
+    pointer-events: none;
 }
-.link:hover .preview { display: inline-block; position: absolute; }
+
+.link:hover .preview { display: inline-block; position: fixed; }
 
     .ul-links{
             list-style: none;
