@@ -1,9 +1,10 @@
+
         <ul class="ul-links">
                 <p class="ul-links__p">_сделал</p>
         {% for project in site.projects %}
+<video autoplay="autoplay" class="preview" src="{{ project.video }}">
                 <li><a class="project-link local-link link" 
                    href="{{ project.url }}">{{ project.title}}
-<video autoplay="autoplay" class="preview" src="{{ project.video }}">
                         </a></li>
         {% endfor %}
                 </ul>
