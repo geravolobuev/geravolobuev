@@ -4,7 +4,6 @@ title: конкурсный постер для Флаэртианы 2021
 titleEn: Flahertiana Film Festival poster
 date: 2021-03-15 09:00:00 +0000
 video: https://www.dropbox.com/s/palr8h23wz03v3i/flahertiana-poster-i.m4v?raw=1
-thumbnail: https://www.dropbox.com/s/ao6ew5rh9t1hy6n/thumb.jpg?raw=1
 ---
 
 ## <span class="mark">Конкурсный постер для фестиваля "Флаэртиана"</span>

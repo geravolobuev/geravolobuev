@@ -1,10 +1,9 @@
 ---
 layout: project
-title: Флаеры+плакат против Child Marriage
+title: Флаеры+плакат для alex f. school
 titleEn: Alex F. School, flyers and posters (a2)
 date: 2020-08-16 12:00:00 +0000
 video: https://www.dropbox.com/s/hf0orsnrnhp4dp6/alex-flyers-posters.m4v?raw=1
-thumbnail: https://www.dropbox.com/s/1zq5iw4m47hhmbf/thumb.jpg?raw=1
 --- 
 
 ## <span class="mark">Графические элементы кампании «Stop child marriage</span>
