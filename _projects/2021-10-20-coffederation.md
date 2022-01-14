@@ -1,6 +1,6 @@
 ---
 layout: project
-title: "Кофедерация" - нейминг и айдентика кофейни
+title: Кофедерация
 date: 2021-10-20 15:00:00 +0000
 video: https://www.dropbox.com/s/t1wwq4jzvli06pc/coffederation-reel.mp4?raw=1
 ---
