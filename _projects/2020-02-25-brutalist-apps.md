@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Брутализм приложения
+title: Brutalist apps
 date: 2020-02-18 19:00:00 +0000
 video: https://www.dropbox.com/s/m9sl6dy3w92s8ch/brutalism.m4v?raw=1
 ---
