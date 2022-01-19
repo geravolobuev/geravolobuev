@@ -123,6 +123,12 @@ display: none;
 filter: grayscale(1);
 }
 
+.social-links {
+    position: fixed;
+    bottom: 1%;
+right: 1%;
+}
+
 .social-links > a {
   border-radius: 25px;
 background: #FAFAFA;
@@ -165,10 +171,6 @@ width: 20vw;
     display: block;
 }
 
-    .about-right {
-    position: fixed;
-    bottom: 1%;
-    }
 
     .about_text{
             margin:0;
@@ -192,8 +194,9 @@ width: 20vw;
     }
 
     @media only screen and (max-width: 600px) {
-.social-links {display: grid}
-.about-right {right: 0}
+.social-links {
+display: grid
+}
     main {
             font-size: 1.9rem;
     line-height: 2.3rem;
