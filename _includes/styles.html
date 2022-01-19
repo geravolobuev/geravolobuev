@@ -10,6 +10,7 @@ cursor: url(/assets/cursor.svg), auto;
 -webkit-font-smoothing: antialiased;
     margin: 0;
 background: #FAFAFA;
+ overflow: overlay;
 }
 
 .ast-pink {
@@ -124,11 +125,11 @@ filter: grayscale(1);
 
 .social-links > a {
   border-radius: 25px;
-  border: 1px solid black; 
 background: #FAFAFA;
 font-family: 'Noto Serif Display', serif;
 font-weight: 200;
 box-shadow: 1px 1px 1px lightgray;
+text-align: center;
 }
 
 .social-links > a:hover {
@@ -147,6 +148,22 @@ box-shadow: 10px 5px 5px blue;
     .ul-links__p {
             margin-bottom: 0;
     }
+
+	.myphoto {
+position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+display: none;
+}
+
+.myphoto-photo {
+width: 20vw;
+}
+
+.about-left-logo:hover + .myphoto {
+    display: block;
+}
 
     .about-right {
     position: fixed;
@@ -194,20 +211,17 @@ img, video {
         }
 ::-webkit-scrollbar {
     width: 50px;
-    background: #FAFAFA;
     margin: 0 2px 0 0;
 }
 
 ::-webkit-scrollbar-thumb {
     border: 2px solid #1a2151;
-    background: #FAFAFA;
     border-radius: 100px
 }
 
 ::-webkit-scrollbar-track {
     box-shadow: 0;
     border-radius: 100px;
-    background: #FAFAFA;
 }
 
 </style>
