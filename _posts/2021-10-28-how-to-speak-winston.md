@@ -14,34 +14,34 @@ Start with the promise, how the audience will be empowered by the talk.
 
 Even before the promise, you can start with the «menu» - outline of what you expect to cover.
 
-**The big four**
+**The big four**  
 1. Cycle on the material. At least 3 times. 
 2. Use verbal punctuation. 
 3. Near miss. Explain concept by nearest examples to it.
 4. Ask question. They should be frequent and answerable. Wait a little while for answer.
 
-**Time & place**
+**Time & place**  
 Try to schedule the talk to the morning hours.  
 The place should be well lid.  
 Choose a place that can be filled completely with listeners.  
 
-**Blackboard**
+**Blackboard**  
 Draw.  
 Make lists  
 Use blackboard as a target.   
 
-**Overhead**
+**Overhead**  
 Dont read your slides. Audience can read too.  
 
-**Props**
+**Props**  
 Use props for demonstrations.   
 
-**Style**
+**Style**  
 Adapt, dont copy style.  
 Its ok to be eccentric.   
 Tell stories.  
 
-**How to stop**
+**How to stop**  
 Dont thank the audience.  
 Tell joke.  
 Deliver.  
