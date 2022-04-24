@@ -1,11 +1,11 @@
 ---
 layout: project
-title: ФИРМЕННЫЙ СТИЛЬ ДЛЯ IFF FLAHERTIANA 2021
+title: Ребрендинг IFF FLAHERTIANA 2021
 date: 2020-08-10 19:00:00 +0000
 video: https://www.dropbox.com/s/cicxeeml0dyrl9b/flahertiana-logo.mp4?raw=1
 ---
 
-## <span class="mark">ФИРМЕННЫЙ СТИЛЬ ДЛЯ IFF FLAHERTIANA 2021</span>
+## <span class="mark">IFF FLAHERTIANA 2021</span>
 
 
 ![flahertiana](https://www.dropbox.com/s/65n9yx3o0a429dj/1.jpg?raw=1)
