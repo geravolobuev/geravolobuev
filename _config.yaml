@@ -1,6 +1,5 @@
 title: гера волобуев 
 permalink: /blog/:slug
-url: https://geravolobuev.ru
 
 paginate: 5
 plugins:
