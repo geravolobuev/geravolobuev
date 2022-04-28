@@ -7,18 +7,8 @@ video: https://www.dropbox.com/s/kl295xkytbsdfye/goldenrule-reel.mov?raw=1
 
 ## <span class="mark">АЙДЕНТИКА ДЛЯ СТОМАТОЛОГИИ "ЗОЛОТОЕ СЕЧЕНИЕ"</span>
 
-![goldenrule](https://www.dropbox.com/s/3nvo7pxewi7mscq/1.jpg?raw=1)
-![goldenrule](https://www.dropbox.com/s/bf4m58pz5tek91y/5.jpg?raw=1)
-![goldenrule](https://www.dropbox.com/s/nuevj9s2hpulbye/bb-1.jpg?raw=1)
-![goldenrule](https://www.dropbox.com/s/a5amchctf4pm7r6/bb-2.jpg?raw=1)
-![goldenrule](https://www.dropbox.com/s/7eynupndya4p2mq/web.jpg?raw=1)
-![goldenrule](https://www.dropbox.com/s/s7h3loo4n3wffdl/papers.jpg?raw=1)
-![goldenrule](https://www.dropbox.com/s/dqwea54xpdxnzfx/bag%2Bcard.jpg?raw=1)
-![goldenrule](https://www.dropbox.com/s/f7dwnyex2cjd2pf/3.png?raw=1)
-![goldenrule](https://www.dropbox.com/s/xmoyku85w8ml620/poster.jpg?raw=1)
-![goldenrule](https://www.dropbox.com/s/64f2tpn3ghndrkb/signage.jpg?raw=1)
-![goldenrule](https://www.dropbox.com/s/peeuqly3v8o3qcc/4.png?raw=1)
-![goldenrule](https://www.dropbox.com/s/i4uyc65tu3feaxj/teeths.jpg?raw=1)
+{% include image-gallery.html folder="/uploads/goldenrule" %}
+
 
 "Golden Ratio" is a dentistry whose main focus is in the field of orthodontics. The clinic uses the most effective and safe anesthesia techniques for dental treatment and prosthetics.
 
