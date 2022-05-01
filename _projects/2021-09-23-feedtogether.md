@@ -3,6 +3,7 @@ layout: project
 title: айдентика feed together 
 date: 2021-09-23 09:00:00 +0000
 video: https://www.dropbox.com/s/yvzjf4h8w1q38cn/feedtogether-video.mp4?raw=1
+preview: https://www.dropbox.com/s/2hiajs08ip43igu/preview.png?raw=1
 ---
 
 ## <span class="mark">Лого, слоган и система дизайна для pro bono проекта</span>

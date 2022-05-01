@@ -3,6 +3,7 @@ layout: project
 title: нейминг и айдентика для сети кофеен 
 date: 2021-10-20 15:00:00 +0000
 video: https://www.dropbox.com/s/t1wwq4jzvli06pc/coffederation-reel.mp4?raw=1
+preview: https://www.dropbox.com/s/9cksglvraqokfrf/preview.gif?raw=1
 ---
 
 ## <span class="mark">НЕЙМИНГ И ФИРМЕННЫЙ СТИЛЬ ДЛЯ СЕТИ КОФЕЕН "КОФЕДЕРАЦИЯ"</span>

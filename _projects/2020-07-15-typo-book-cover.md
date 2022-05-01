@@ -4,6 +4,7 @@ title: обложка книги "типографика"
 titleEn: V. Laptev "Typography" book soft/hardcover
 date: 2020-07-06 02:00:00 +0000
 video: https://www.dropbox.com/s/oifhukd3z68mplr/typo-book-cover.m4v?raw=1
+preview: https://www.dropbox.com/s/vwvdxyye05358yj/preview.png?raw=1
 --- 
 
 <span class="mark">Обложка книги "Типографика: Порядок и Хаос"</span>
