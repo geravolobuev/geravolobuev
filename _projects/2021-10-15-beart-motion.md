@@ -1,7 +1,7 @@
 ---
 layout: project
-title: motion & 3d assets for beart studio
-titleEn: beart
+title: MOTION И 3D МАТЕРИАЛЫ ДЛЯ СТУДИИ BEART
+titleEn: various motion & 3D for beart agency
 date: 2021-11-15 09:00:00 +0000
 video: https://www.dropbox.com/s/md6420uz2yhyhtu/video.mp4?raw=1
 preview: https://www.dropbox.com/s/g27rwvibzangc86/preview.gif?raw=1
