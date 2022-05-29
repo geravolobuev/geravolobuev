@@ -15,6 +15,9 @@
                 <source src="{{ page.video }}" type="video/mp4"> </video>
             {{ content }}
                 </article>
+                <footer> 
+<p style="color: grey;">{{ page.date | date: "%-d %B %Y" }}</p>
+                </footer>
         </main>
     </div>
 </body>
