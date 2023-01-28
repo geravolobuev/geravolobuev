@@ -81,6 +81,7 @@ Now, the form does not have to criticize me.
 Never present with doubts or fear. Be sure of what you have done.
 
 **Recommended books** Grid Systems in Graphic Design | Josef Müller-Brockman  Paula Scher: Works (concise edition) | Tony Brook & Adrian Shaughnessy  Letter and Image | Massin  Jost Hochuli: Printed Matter, Mainly Books | Jost Hochuli  Creative Code: Aesthetics + Computation | John Maeda  A Designers Art | Paul Rand  Forget all the rules you have been taught about graphic design. Even the ones in this book | Bob Gill  Tibor Kalman: Perverse Optimist | Peter Hall  The Art of Looking Sideways | Alan Fletcher  Printed matter | Karel Martens  Citizen first, Designer second | Rejane Dal Bello  Designer, Activist, Visual Historian | David King  The Visual History of Type | Paul McNeil  A * New * Program for Graphic Design | David Reinfurt  The Form of the Book Book | Edited by Sara De Bondt and Fraser Muggeridge  100 Whites | Kenya Hara  Notes on Book Design | Derek Birdsall  The Art of Graphic Design | Bradbury Thompson Robert Brownjohn: Sex and Typography 
+
 **Reference designers:** Emily Atwood  Practice  Anthony Burril  Experimental Jetset  Sara De Bondt studio  Europe  Carvalho Bernau  Spin  Fraser Muggeridge studio  Julia  Porto Rocha  Studio FERNANDO GUTIÉRREZ  Mark Porter Associates  Trevor Jackson  Zak Group  Collins  Neil Donnelly Studio  OK-RM  Atelier Dyakova  Other Means  John Morgan studio  Nick Adam  Sarah Boris  Arauna  Work-order  Works
 
 
