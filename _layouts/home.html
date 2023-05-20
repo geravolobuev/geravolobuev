@@ -9,72 +9,24 @@
 <body>
         <div class="wrapper">
         <main class="lowercased">
-                <section class="about">
-                        <div class="about-left">
-    {% include logo.html %}
+<section>
+hi! 👋 i’m gera!</br>
+a multidisciplinary designer.
+currently 💼 at <a href="http://pirs5.ru">pirs 5</a>.
+</section>
+</br>
 
-<div class="myphoto">
-<img class="myphoto-photo" src="https://www.dropbox.com/s/g60l6909aeq4krq/myphoto.jpg?raw=1">
-</div>
-<div class="blur"></div>
-                        </div>
-
-                        <div class="about-right">
-{% include sociallinks.html %}
-                        </div>
-        </section>
-
-                <section class="projects">
-            {% include feed-projects.html %}
-                </section>
+<section>
+🥂 selected clients</br>
+renaissance bank, gazprom, 
+tele2, adamas, vk, russian post, 
+mvideo-eldorado group.
+</section>
 
                 <section class="posts">
             {% include feed-posts.html %}
                 </section>
             </main>
-    {% include footer.html %}
-<canvas id="canvas">Canvas is not supported
-        on this browser!</canvas>
-        <script>
-
-document.addEventListener("mouseup", mouseEvent);
-document.addEventListener("mousedown", mouseEvent);
-document.addEventListener('mousemove', mouseEvent);
-
-const mouse = {x: 0, y: 0, down: "forcedown"};  // starts with mouse down
-function mouseEvent(event) {
-      const bounds = canvas.getBoundingClientRect();
-      const x = event.pageX - bounds.left - scrollX;
-      const y = event.pageY - bounds.top  - scrollY;
-    if (event.type === "mousedown" || mouse.down === "forcedown") {
-        mouse.down = true 
-        mouse.x = x;
-        mouse.y = y;
-    }
-    if (event.type === "mouseup") { mouse.down = false }
-    if (mouse.down) {    
-        ctx.beginPath()
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.lineTo(mouse.x = x, mouse.y = y);
-        ctx.stroke();
-    }
-}
-
-
-const ctx = canvas.getContext('2d');
- var width  = window.innerWidth;
-        var height = window.innerHeight;
-        canvas.height = height;
-        canvas.width = width;
-
-const colorsArray = ["#e38ea5", "#f4e78f", "#a4e38e", "#f1c39e", "#cbb7dd",
-"#e79ef1"];
-ctx.strokeStyle = colorsArray[Math.random() * colorsArray.length | 0];
-            var lineWidth = Math.floor(Math.random()*130 + 20);
-            ctx.lineWidth = lineWidth;
-ctx.lineCap = ctx.lineJoin = 'round';
-
-                </script>
         </div>
 </body>
 

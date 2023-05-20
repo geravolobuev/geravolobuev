@@ -3,11 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
 
 @font-face {
-	font-family: "helveticaStretched";
-	src: url("../assets/HelveticaNeueCyr-Roman.woff");
+	font-family: "Arial";
 }
 
 * {box-sizing: border-box;}
+
 body, HTML {
 font-family: 'helveticaStretched', sans-serif;
 cursor: url(/assets/cursor.svg), auto;
@@ -16,29 +16,10 @@ cursor: url(/assets/cursor.svg), auto;
     margin: 0;
 background: #FAFAFA;
  overflow: overlay;
-
 }
 
 .ast-pink {
             color: #ff2587;
-}
-
-.wrapper-portfolio {
-        background: black;
-        color: white;
-}
-
-    .portfolio {
-            padding: 2rem;
-    }
-
-#canvas {
-z-index: 1;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
 }
 
 pre {
@@ -50,9 +31,13 @@ pre {
 }
 
     a {
-            color: black;
             text-decoration: none;
     }
+
+.post_back {
+position: fixed;
+color: black;
+}
 
 .ul-links > li:hover {
   animation: shake 0.5s;
@@ -73,7 +58,6 @@ pre {
 }
 
     h2 {
-            font-size: 2.9rem;
             font-weight: normal;
             margin-bottom: 10%;
     }
@@ -84,28 +68,14 @@ pre {
     }
 
     main {
-            font-size: 2.9rem;
-    line-height: 3.3rem;
-            position: relative;
-    z-index: 10;
-    padding: 2rem;
+    padding: 1rem;
+font-size: 7vw;
+line-height: 8vw;
     }
     
 
-    .portfolio-header {
-  display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
-  grid-template-rows: 1fr;
-  gap: 1px 1px;
-  grid-template-areas: ". .";
-  min-height: 25rem;
-    }
-
-    article {
-max-width: 1120px;
-}
-
 strong {
+font-weight: normal;
 background-image: linear-gradient(
 120deg
 ,#ff0,#ff0);
@@ -116,12 +86,6 @@ background-image: linear-gradient(
 
     .mark {
 text-transform: uppercase;
-    color: white;
-    background: black;
-    }
-
-    .portfolio-link {
-color: white;
     }
 
 .preview { 
@@ -187,27 +151,6 @@ box-shadow: 10px 5px 5px blue;
             margin-bottom: 0;
     }
 
-	.myphoto {
-position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-display: none;
-}
-
-.myphoto-photo {
-width: 20vw;
-}
-
-.about-left-logo {
-font-family: 'Pinyon Script', cursive;
-text-transform: none;
-}
-
-.about-left-logo:hover + .myphoto {
-    display: block;
-}
-
 
     .about_text{
             margin:0;
@@ -247,9 +190,6 @@ display: grid
 img, video {
     max-height: 80%;
     max-width: 80%;
-    }
-    h2 {
-            font-size: 1.9rem;
     }
         }
 ::-webkit-scrollbar {
