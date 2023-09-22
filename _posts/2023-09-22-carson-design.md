@@ -1,11 +1,11 @@
 ---
 layout: post
-title: David Carson
+title: David Carson masterclass
 date: 2023-09-22 12:00:00 +0000
 description: Конспект курса
 ---
 
-## David Carson course notes
+## DAVID CARSON COURSE NOTES
 
 Use your intuition. Trust it. 
 
