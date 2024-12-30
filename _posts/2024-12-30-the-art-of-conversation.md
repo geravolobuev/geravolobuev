@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The Art of Сonversation by Catherine Blyth
-date: 2024-08-03 10:00:00 +0000
+date: 2024-12-30 10:00:00 +0000
 description: Book summary 
 ---
 
