@@ -11,7 +11,7 @@ Conversation is all about taking turns.
 Dialogue, not a monologue. 
 You share the talking time; you also listen and acknowledge. 
 
-### You should differentiate «radiators» and «drains» people.
+#### You should differentiate «radiators» and «drains» people.
 Thera are several types of «drainers»:
 1. Enthuso-bore. They exudes energy and enthusiasm, but it can be extremely tiring for others. Its self-centered and one-sided, without any acknowledgment of the needs of the listener. Enthusiasm on its own is no guarantee of a good conversation!
 2. Robo-chore. They are like Enthuso-bores without enthusiasm. They dont want to be in conversation with you at all, but feel an obligation. You can challenge them to be more real by asking genuine questions and refusing to be satisfied with stock answers.
@@ -31,7 +31,7 @@ As you take those first tentative steps in conversation, look out for people’s
 
 If you never take breath or use your eyes to check whether your listeners are following you intellectually and emotionally, they’ll quickly lose interest. 
 
-### Matching the person
+#### Matching the person
 You get on someone’s wavelength most easily and surely by tuning in to the sound of their voice and their body language.
 
 When people are connecting well they tend to share similar movements or lack of movement.
@@ -44,7 +44,7 @@ Its not the same as copying the mood. For example, when responding to an angry p
 You match, then you lead.
 The first words of your interruption need to be as fast and loud as the general melee: you might use an introductory phrase to interrupt, such as «I’d like to add something here». Once you interruption has been heard, you can make your point, gradually adjusting to your normal volume and pace, and people will listen. 
 
-### When you’re ready to move on from a conversation:
+#### When you’re ready to move on from a conversation:
 * Change your voice tone. A higher quicker tone usually works well.
 * Stand up - even if the other person cant’t see you - as this changes your energy.
 * Summarize the conversation, if you like, to wrap it up.
@@ -53,7 +53,7 @@ The first words of your interruption need to be as fast and loud as the general 
 There is no need to join in conversation that compromises your values. 
 If it not going well, it isn’t necessarily your fault. Its important not to loose yourself in the process. Be fully present, and unafraid to be yourself. 
 
-### State of mind
+#### State of mind
 More than skill, voice, fluency or intelligence good conversation depend to an enormous extent on your state of mind. Understand first that your state of mind does not have to be out of your control. It is possible to influence your state.
 
 #### Movement and breath
