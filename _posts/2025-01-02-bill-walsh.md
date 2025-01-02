@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Score takes care of itself
+title: The score takes care of itself
 date: 2025-01-02 01:00:00 +0000
 description: Book summary
 ---
 
-## Bill Walsh - Score Takes Care of Itself
+## Bill Walsh - The Score Takes Care of Itself
 
 #### To Succeed You Must Fail
 One of the profound lessons I have learned during my career, namely, that even when you have an organization brimming with talent, victory is not always under your control. Rather, it’s like quicksilver—fleeting and elusive, not something you can summon at will even under the best circumstances. Almost always, your road to victory goes through a place called “failure.”
