@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Score takes care of itself
-date: 2025-01-02 00:00:00 +0000
+date: 2025-01-02 01:00:00 +0000
 description: Book summary
 ---
 
